@@ -18,23 +18,21 @@ public:
 
     Database (QString DatabaseName_, QString hostname_, QString username_, QString password_, MainWindow *window_);
 
-    void Show_tables();
+    bool Show_tables();
 
-    void Show_table_data(QString table_name);
+    bool Show_table_data(QString table_name);
 
-    void Show_workers();
+    bool Show_workers();
 
-    void Show_data(QString table, int id);
+    bool Show_data(QString table, int id);
 
-    void Attendance_control(int id = 0);
+    bool Attendance_control(int id = 0);
 
-    void Input_data(QString table_name, std::vector<QString> data);
+    bool Insert_data (QString table_name, std::vector<QString> data);
 
-    void Insert_data (QString table_name, std::vector<QString> data);
+    bool Remove_raw(QString table_name, QString column, QString data);
 
-    void Remove_raw(QString table_name, QString column, QString data);
-
-    void Close_database();
+    bool Close_database();
 
 private:
     QString DatabaseName,

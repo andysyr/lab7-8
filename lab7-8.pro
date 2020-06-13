@@ -14,6 +14,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+        ../googletest-master/googletest/src/gtest-all.cc \
+        ../googletest-master/googletest/src/gtest-death-test.cc \
+        ../googletest-master/googletest/src/gtest-filepath.cc \
+        ../googletest-master/googletest/src/gtest-matchers.cc \
+        ../googletest-master/googletest/src/gtest-port.cc \
+        ../googletest-master/googletest/src/gtest-printers.cc \
+        ../googletest-master/googletest/src/gtest-test-part.cc \
+        ../googletest-master/googletest/src/gtest-typed-test.cc \
+        ../googletest-master/googletest/src/gtest.cc \
         databaselologic.cpp \
         main.cpp \
         mainwindow.cpp
@@ -35,3 +44,9 @@ DISTFILES += \
 HEADERS += \
     databaselogic.h \
     mainwindow.h
+
+INCLUDEPATH += \
+    $$PWD/../googletest-master/googletest \
+    $$PWD/../googletest-master/googletest/include \
+    $$PWD/../googletest-master/googlemock \
+    $$PWD/../googletest-master/googlemock/include

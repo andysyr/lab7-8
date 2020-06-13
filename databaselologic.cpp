@@ -12,32 +12,40 @@ Database::Database(QString DatabaseName_, QString hostname_, QString username_, 
     db.setUserName(username);
     db.setPassword(password);
 
-    if (!db.open())
-    {
-        qDebug() << "Cannot open database:" << db.lastError();
-    }
-    else
-    {
-        qDebug() << "Database opened.";
-    }
+    db.open();
 }
 
-void Database::Show_tables()
+bool Database::Show_tables()
 {
+    if(!db.open())
+    {
+        return false;
+    }
         foreach (QString str, db.tables())
         {
             qDebug()<< " table: " + str;
         }
+    return true;
 }
 
-void Database::Show_table_data (QString table_name)
+bool Database::Show_table_data (QString table_name)
 {
+    if(!db.open())
+    {
+        return false;
+    }
     model_read.setQuery("SELECT *FROM " + table_name);
     view.setModel(&model_read);
+
+    return true;
 }
 
-void Database::Insert_data (QString table_name, std::vector<QString> data)
+bool Database::Insert_data (QString table_name, std::vector<QString> data)
 {
+    if(!db.open())
+    {
+        return false;
+    }
     QString temp_string = "INSERT INTO " + table_name + " VALUES (";
 
     for (int i = 0; i < data.size(); i++)
@@ -52,37 +60,16 @@ void Database::Insert_data (QString table_name, std::vector<QString> data)
 
     model_read.setQuery(temp_string);
     view.setModel(&model_read);
+
+    return true;
 }
 
-void Database::Input_data(QString table_name, std::vector<QString> data)
+bool Database::Show_data(QString table, int id)
 {
-    model_read_write.setTable(table_name);
-    model_read_write.setEditStrategy(QSqlTableModel::OnFieldChange);
-
-    model_read_write.select();
-    qDebug() << model_read_write.lastError();
-
-    if(data.size() != model_read_write.columnCount())
+    if(!db.open())
     {
-        qDebug()<<"wrong amount of arguments, columns: " << model_read_write.columnCount();
-        return;
+        return false;
     }
-
-    int row = model_read_write.rowCount();
-
-    model_read_write.insertRows(row, 0);
-
-    for (int i = 0; i < data.size(); i++)
-    {
-        model_read_write.setData(model_read_write.index(row, 1), data[i+1]);
-    }
-
-    view.setModel(&model_read_write);
-    //view.show();
-}
-
-void Database::Show_data(QString table, int id)
-{
     QString temp = "SELECT * FROM workers LEFT JOIN " + table + " ON workers.id = " + table + ".id";
 
     if(id != 0)
@@ -92,10 +79,16 @@ void Database::Show_data(QString table, int id)
 
     model_read.setQuery(temp);
     view.setModel(&model_read);
+
+    return true;
 }
 
-void Database::Attendance_control(int id)
+bool Database::Attendance_control(int id)
 {
+    if(!db.open())
+    {
+        return false;
+    }
     QString temp = "SELECT * FROM workers LEFT JOIN schedule ON workers.id = schedule.id INNER JOIN autorizations ON workers.id = autorizations.id";
 
     if(id != 0)
@@ -104,17 +97,34 @@ void Database::Attendance_control(int id)
     }
 
     model_read.setQuery(temp);
+
+    auto check = model_read_write.query();
+
     view.setModel(&model_read);
+
+    return true;
 }
 
-void Database::Remove_raw(QString table_name, QString column, QString data)
+bool Database::Remove_raw(QString table_name, QString column, QString data)
 {
-    model_read.setQuery("DELETE FROM " + table_name + " WHERE " + column + " = " + data);
+    if(!db.open())
+    {
+        return false;
+    }
+    model_read.setQuery("DELETE FROM " + table_name + " WHERE " + column + " = " + "'" + data + "'");
     view.setModel(&model_read);
+
+    return true;
 }
 
 
-void Database::Close_database()
+bool Database::Close_database()
 {
+    if(!db.open())
+    {
+        return false;
+    }
     db.close();
+
+    return true;
 }

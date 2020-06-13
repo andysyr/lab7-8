@@ -17,19 +17,19 @@ public:
 
     void Connect_database();
 
-    void Show_tables();
+    bool Show_tables();
 
-    void Show_table_data(QString table_name);
+    bool Show_table_data(QString table_name);
 
-    void Show_data(QString table_name, int id = 0);
+    bool Show_data(QString table_name, int id = 0);
 
-    void Attendance_control(int id = 0);
+    bool Attendance_control(int id = 0);
 
-    void Input_data(QString table_name, std::vector<QString> data);
+    bool Insert_data (QString table_name, std::vector<QString> data);
 
-    void Insert_data (QString table_name, std::vector<QString> data);
+    bool Remove_raw(QString table_name, QString column, QString data);
 
-    void Remove_raw(QString table_name, QString column, QString data);
+    bool Close_database();
 
     MainWindow(QWidget *parent = nullptr);
 
@@ -37,6 +37,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
+public:
     std::unique_ptr<Database> database;
 };
 #endif // MAINWINDOW_H
