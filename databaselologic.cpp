@@ -28,13 +28,21 @@ bool Database::Show_tables()
     return true;
 }
 
-bool Database::Show_table_data (QString table_name)
+bool Database::Show_table_data (QString table_name, int id)
 {
     if(!db.open())
     {
         return false;
     }
-    model_read.setQuery("SELECT *FROM " + table_name);
+    QString temp = "SELECT *FROM " + table_name;
+
+
+    if(id != 0)
+    {
+        temp += " WHERE " + table_name + ".id = " + QString::number(id);
+    }
+
+    model_read.setQuery(temp);
     view.setModel(&model_read);
 
     return true;

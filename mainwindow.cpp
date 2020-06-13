@@ -21,9 +21,9 @@ bool MainWindow::Show_tables()
     return database->Show_tables();
 }
 
-bool MainWindow::Show_table_data(QString table_name)
+bool MainWindow::Show_table_data(QString table_name, int id)
 {
-    bool res = database->Show_table_data(table_name);
+    bool res = database->Show_table_data(table_name, id);
     this->show();
     return res;
 }

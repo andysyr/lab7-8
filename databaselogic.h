@@ -20,7 +20,7 @@ public:
 
     bool Show_tables();
 
-    bool Show_table_data(QString table_name);
+    bool Show_table_data(QString table_name, int id = 0);
 
     bool Show_workers();
 

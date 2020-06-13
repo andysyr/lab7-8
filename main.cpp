@@ -48,13 +48,15 @@ int main(int argc, char *argv[])
 
     w.Connect_database();
 
-    //w.Show_tables();
+    w.Show_tables();
 
-    //w.Show_data(table_position);
-
-    w.Show_table_data(table_autorizations);
+    w.Show_data(table_worker_info);
 
     //w.Show_data(table_position, 1);
+
+    //w.Show_table_data(table_autorizations);
+
+    //w.Show_table_data(table_autorizations, 1);
 
     //w.Attendance_control();
 
@@ -204,9 +206,9 @@ TEST (Repository_logic, Insert_data)
     w.Connect_database();
 
     std::vector<QString> data(3);
-    data[1] = "101";
+    data[0] = "101";
+    data[1] = "test";
     data[2] = "test";
-    data[3] = "test";
 
     EXPECT_TRUE(w.database->Insert_data("position", data));
 
