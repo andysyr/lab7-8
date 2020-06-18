@@ -6,6 +6,11 @@
 
 #include "mainwindow.h"
 
+#include "structural_patterns.h"
+#include "creational_patterns.h"
+#include "behavioral_patterns_part1.h"
+#include "behavioral_patterns_part2.h"
+
 #include "gtest/gtest.h"
 
 
