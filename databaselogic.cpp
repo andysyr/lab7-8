@@ -18,17 +18,17 @@ Database::Database(QString DatabaseName_, QString hostname_, QString username_, 
     }
 }
 
-bool Database::Show_tables()
+QStringList Database::Show_tables()
 {
     if(!db.open())
     {
-        return false;
+        return {};
     }
-        foreach (QString str, db.tables())
-        {
-            qDebug()<< " table: " + str;
-        }
-    return true;
+//        foreach (QString str, db.tables())
+//        {
+//            qDebug()<< " table: " + str;
+//        }
+    return db.tables();
 }
 
 bool Database::Show_table_data (QString table_name, int id)
@@ -47,7 +47,6 @@ bool Database::Show_table_data (QString table_name, int id)
 
     model_read.setQuery(temp);
     view.setModel(&model_read);
-
     return true;
 }
 
@@ -90,6 +89,7 @@ bool Database::Show_data(QString table, int id)
 
     model_read.setQuery(temp);
     view.setModel(&model_read);
+
 
     return true;
 }

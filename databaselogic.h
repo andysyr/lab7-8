@@ -17,7 +17,7 @@ public:
 
     Database (QString DatabaseName_, QString hostname_, QString username_, QString password_, MainWindow *window_);
 
-    bool Show_tables();
+    QStringList Show_tables();
 
     bool Show_table_data(QString table_name, int id = 0);
 

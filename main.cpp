@@ -45,10 +45,10 @@ int main(int argc, char *argv[])
 
     w.Connect_database();
 
-    std::string input;
-    std::cout << "This is demo C++/MYSQL application, supporting commands\n"
-                 "are shown below. Please, choose one of them\n"
-                 "To exit the application input \"exit\"" << std::endl;
+//    std::string input;
+//    std::cout << "This is demo C++/MYSQL application, supporting commands\n"
+//                 "are shown below. Please, choose one of them\n"
+//                 "To exit the application input \"exit\"" << std::endl;
 
 //    do
 //    {
