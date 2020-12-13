@@ -12,7 +12,10 @@ Database::Database(QString DatabaseName_, QString hostname_, QString username_, 
     db.setUserName(username);
     db.setPassword(password);
 
-    db.open();
+    if(!db.open())
+    {
+        std::cout<<"Failed to open database!" << std::endl;
+    }
 }
 
 bool Database::Show_tables()

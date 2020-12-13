@@ -7,7 +7,6 @@
 #include <QTableView>
 #include <QApplication>
 
-
 class MainWindow;
 
 class Database

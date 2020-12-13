@@ -6,14 +6,6 @@
 
 #include "mainwindow.h"
 
-#include "structural_patterns.h"
-#include "creational_patterns.h"
-#include "behavioral_patterns_part1.h"
-#include "behavioral_patterns_part2.h"
-
-#include "gtest/gtest.h"
-
-
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -53,191 +45,57 @@ int main(int argc, char *argv[])
 
     w.Connect_database();
 
-    w.Show_tables();
+    std::string input;
+    std::cout << "This is demo C++/MYSQL application, supporting commands\n"
+                 "are shown below. Please, choose one of them\n"
+                 "To exit the application input \"exit\"" << std::endl;
 
-    w.Show_data(table_worker_info);
+//    do
+//    {
+//        std::cout << "\"tables\" - to show list of tables\n"
+//                     "\"show table data\" - to show data of the\n"
+//                     "choosen table\n"
+//                     "\"show data\" - to show all data\n"
+//                     "\"Control\" - to show attendance control info\n"
+//                     "\"insert\" - to display control info\n"
+//                     "\"remove\" - to remove row in a table\n"
+//                     "To exit the application input \"exit\"" << std::endl;
 
-    //w.Show_data(table_position, 1);
+//        std::cout << "Your command: ";
+//        std::cin >> input;
 
-    //w.Show_table_data(table_autorizations);
+//        if(input == "tables")
+//        {
+//            w.Show_tables();
+//            a.exec();
+//
+//        }
+//        else if (input == "show table data")
+//        {
 
-    //w.Show_table_data(table_autorizations, 1);
+//        }
 
-    //w.Attendance_control();
+//    }while(input != "exit");
 
-    //w.Attendance_control(2);
 
-    //w.Remove_raw(table_position, "pos_name", "test");
 
-    //w.Show_table_data(table_position);
+//    w.Show_tables();
 
-    //w.Insert_data(table_position, test_position_data);
+//    w.Show_data(table_worker_info);
 
-    ::testing::InitGoogleTest (&argc, argv);
-    RUN_ALL_TESTS();
+//    w.Show_data(table_schedule, 1);
 
+//    w.Show_table_data(table_autorizations);
+
+//    w.Show_table_data(table_autorizations, 1);
+
+//    w.Attendance_control();
+
+//    w.Attendance_control(2);
+
+//    w.Remove_raw(table_position, "pos_name", "test");
+//    w.Insert_data(table_position, test_position_data);
+
+    w.show();
     return a.exec();
-}
-
-
-
-TEST (Business_Logic, Show_tables)
-{
-    MainWindow w;
-    w.Connect_database();
-
-    EXPECT_TRUE(w.Show_tables());
-
-    w.Close_database();
-    w.close();
-}
-
-
-TEST (Business_Logic, Show_table_data)
-{
-    MainWindow w;
-    w.Connect_database();
-
-    EXPECT_TRUE(w.Show_table_data("workers"));
-    EXPECT_TRUE(w.Show_table_data("autorizations"));
-    EXPECT_TRUE(w.Show_table_data("position"));
-    EXPECT_TRUE(w.Show_table_data("schedule"));
-    EXPECT_TRUE(w.Show_table_data("worker_info"));
-
-    w.Close_database();
-    w.close();
-}
-
-TEST (Business_Logic, Show_data)
-{
-    MainWindow w;
-    w.Connect_database();
-
-    EXPECT_TRUE(w.Show_data("workers"));
-    EXPECT_TRUE(w.Show_data("autorizations"));
-    EXPECT_TRUE(w.Show_data("position"));
-    EXPECT_TRUE(w.Show_data("schedule"));
-    EXPECT_TRUE(w.Show_data("worker_info"));
-
-    w.Close_database();
-    w.close();
-}
-
-TEST (Business_Logic, Insert_data)
-{
-    MainWindow w;
-    w.Connect_database();
-
-    std::vector<QString> data(3);
-    data[0] = "11";
-    data[1] = "test";
-    data[2] = "test";
-
-    EXPECT_TRUE(w.Insert_data("position", data));
-
-    w.Close_database();
-    w.close();
-}
-
-TEST (Business_Logic, Remove_raw)
-{
-    MainWindow w;
-    w.Connect_database();
-
-    EXPECT_TRUE(w.Remove_raw("position", "pos_name", "test"));
-
-    w.Close_database();
-    w.close();
-}
-
-TEST (Business_Logic, Attendance_control)
-{
-    MainWindow w;
-    w.Connect_database();
-
-    EXPECT_TRUE(w.Attendance_control());
-
-    w.Close_database();
-    w.close();
-}
-
-
-
-TEST (Repository_logic, Show_tables)
-{
-    MainWindow w;
-    w.Connect_database();
-
-    EXPECT_TRUE(w.database->Show_tables());
-
-    w.Close_database();
-    w.close();
-}
-
-
-TEST (Repository_logic, Show_table_data)
-{
-    MainWindow w;
-    w.Connect_database();
-
-    EXPECT_TRUE(w.database->Show_table_data("workers"));
-    EXPECT_TRUE(w.database->Show_table_data("autorizations"));
-    EXPECT_TRUE(w.database->Show_table_data("position"));
-    EXPECT_TRUE(w.database->Show_table_data("schedule"));
-    EXPECT_TRUE(w.database->Show_table_data("worker_info"));
-
-    w.Close_database();
-    w.close();
-}
-
-TEST (Repository_logic, Show_data)
-{
-    MainWindow w;
-    w.Connect_database();
-
-    EXPECT_TRUE(w.database->Show_data("workers", 0));
-    EXPECT_TRUE(w.database->Show_data("autorizations", 0));
-    EXPECT_TRUE(w.database->Show_data("position", 0));
-    EXPECT_TRUE(w.database->Show_data("schedule", 0));
-    EXPECT_TRUE(w.database->Show_data("worker_info", 0));
-
-    w.Close_database();
-    w.close();
-}
-
-TEST (Repository_logic, Insert_data)
-{
-    MainWindow w;
-    w.Connect_database();
-
-    std::vector<QString> data(3);
-    data[0] = "101";
-    data[1] = "test";
-    data[2] = "test";
-
-    EXPECT_TRUE(w.database->Insert_data("position", data));
-
-    w.Close_database();
-    w.close();
-}
-
-TEST (Repository_logic, Remove_raw)
-{
-    MainWindow w;
-    w.Connect_database();
-
-    EXPECT_TRUE(w.database->Remove_raw("position", "pos_name", "test"));
-    w.Close_database();
-    w.close();
-}
-
-TEST (Repository_logic, Attendance_control)
-{
-    MainWindow w;
-    w.Connect_database();
-
-    EXPECT_TRUE(w.database->Attendance_control());
-
-    w.Close_database();
-    w.close();
 }

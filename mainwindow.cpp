@@ -4,6 +4,9 @@
 void MainWindow::Add_widget_to_layout(QWidget *object)
 {
     ui->verticalLayout->addWidget(object);
+    connect(ui->showTablesButton, &QPushButton::pressed, this, &MainWindow::onShow_tablesPressed);
+    connect(ui->showDataPushButton, &QPushButton::pressed, this, &MainWindow::onShow_data);
+
 }
 
 void MainWindow::Connect_database()
@@ -62,5 +65,25 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::onShow_tablesPressed()
+{
+    Show_tables();
+}
+
+void MainWindow::onShow_table_data()
+{
+    Show_table_data(ui->showDataLineEdit->placeholderText(), ui->showDataIdSpinBox->value());
+}
+
+void MainWindow::onShow_data()
+{
+
+}
+
+void MainWindow::onAttendance_control()
+{
+
 }
 

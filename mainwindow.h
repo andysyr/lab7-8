@@ -17,6 +17,7 @@ public:
 
     void Connect_database();
 
+    //
     bool Show_tables();
 
     bool Show_table_data(QString table_name, int id = 0);
@@ -24,6 +25,8 @@ public:
     bool Show_data(QString table_name, int id = 0);
 
     bool Attendance_control(int id = 0);
+
+    //
 
     bool Insert_data (QString table_name, std::vector<QString> data);
 
@@ -34,6 +37,11 @@ public:
     MainWindow(QWidget *parent = nullptr);
 
     ~MainWindow();
+private slots:
+    void onShow_tablesPressed();
+    void onShow_table_data();
+    void onShow_data();
+    void onAttendance_control();
 
 private:
     Ui::MainWindow *ui;
