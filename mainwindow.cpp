@@ -5,10 +5,10 @@ void MainWindow::Add_widget_to_layout(QWidget *object)
 {
     ui->verticalLayout->addWidget(object);
     connect(ui->showTablesButton, &QPushButton::pressed, this, &MainWindow::onShow_tablesPressed);
-    connect(ui->showDataPushButton, &QPushButton::pressed, this, &MainWindow::onShow_table_data);
-    connect(ui->showFullDatapushButton, &QPushButton::pressed, this, &MainWindow::onShow_data);
-    connect(ui->Attendance_controlPushButton, &QPushButton::pressed, this, &MainWindow::onAttendance_control);
-
+    connect(ui->showDataPushButton, &QPushButton::pressed, this, &MainWindow::onShow_table_dataPressed);
+    connect(ui->showSingleProductInfopushButton, &QPushButton::pressed, this, &MainWindow::onShowSingleProductInfoPressed);
+    connect(ui->showInnerInfoPushButton, &QPushButton::pressed, this, &MainWindow::onShowInnerInfoPressed);
+    connect(ui->showWareHouseInfopushButton, &QPushButton::pressed, this, &MainWindow::onShowWarehouseInfoPressed);
 }
 
 void MainWindow::Connect_database()
@@ -36,19 +36,24 @@ bool MainWindow::Show_table_data(QString table_name, int id)
     return res;
 }
 
-bool MainWindow::Show_data(QString table_name, int id)
+bool MainWindow::ShowSingleProductInfo(int id)
 {
-    bool res = database->Show_data(table_name, id);
-//    this->show();
+    bool res = database->ShowSingleProductInfo(id);
     return res;
 }
 
-bool MainWindow::Attendance_control(int id)
+bool MainWindow::ShowInnerInfo(int id)
 {
-    bool res = database->Attendance_control(id);
-    this->show();
+    bool res = database->ShowInnerInfo(id);
     return res;
 }
+
+bool MainWindow::ShowWareHouseInfo(int id)
+{
+    bool res = database->ShowWareHouseInfo(id);
+    return res;
+}
+
 
 bool MainWindow::Remove_raw(QString table_name, QString column, QString data)
 {
@@ -77,18 +82,23 @@ void MainWindow::onShow_tablesPressed()
     Show_tables();
 }
 
-void MainWindow::onShow_table_data()
+void MainWindow::onShow_table_dataPressed()
 {
     Show_table_data(ui->showDataLineEdit->text(), ui->showDataIdSpinBox->value());
 }
 
-void MainWindow::onShow_data()
+void MainWindow::onShowSingleProductInfoPressed()
 {
-    Show_data(ui->showFullDatalineEdit->text(), ui->showFullDataIdspinBox->value());
+    ShowSingleProductInfo(ui->showSingleProductInfospinBox->value());
 }
 
-void MainWindow::onAttendance_control()
+void MainWindow::onShowInnerInfoPressed()
 {
-    Attendance_control(ui->Attendance_controlSpinBox->value());
+    ShowInnerInfo(ui->showInnerInfoSpinBox->value());
+}
+
+void MainWindow::onShowWarehouseInfoPressed()
+{
+    ShowWareHouseInfo(ui->showInnerInfoSpinBox->value());
 }
 

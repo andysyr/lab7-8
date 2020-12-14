@@ -20,15 +20,11 @@ public:
     QStringList Show_tables();
 
     bool Show_table_data(QString table_name, int id = 0);
-
-    bool Show_workers();
-
-    bool Show_data(QString table, int id);
-
-    bool Attendance_control(int id = 0);
+    bool ShowSingleProductInfo(int id);
+    bool ShowInnerInfo(int id);
+    bool ShowWareHouseInfo(int id);
 
     bool Insert_data (QString table_name, std::vector<QString> data);
-
     bool Remove_raw(QString table_name, QString column, QString data);
 
     bool Close_database();

@@ -74,43 +74,58 @@ bool Database::Insert_data (QString table_name, std::vector<QString> data)
     return true;
 }
 
-bool Database::Show_data(QString table, int id)
+bool Database::ShowSingleProductInfo(int id)
 {
     if(!db.open())
     {
         return false;
     }
-    QString temp = "SELECT * FROM workers LEFT JOIN " + table + " ON workers.id = " + table + ".id";
+    QString temp = "SELECT * FROM singleproduct LEFT JOIN producttype ON singleproduct.serialNumber = producttype.idSingleProduct";
 
     if(id != 0)
     {
-        temp += " WHERE workers.id = " + QString::number(id);
+        temp += " WHERE singleproduct.serialNumber = " + QString::number(id);
     }
 
     model_read.setQuery(temp);
     view.setModel(&model_read);
 
-
     return true;
 }
 
-bool Database::Attendance_control(int id)
+bool Database::ShowInnerInfo(int id)
 {
     if(!db.open())
     {
         return false;
     }
-    QString temp = "SELECT * FROM workers LEFT JOIN schedule ON workers.id = schedule.id INNER JOIN autorizations ON workers.id = autorizations.id";
+    QString temp = "SELECT * FROM innerinfo LEFT JOIN producttype ON innerinfo.idInnerInfo = producttype.idSingleProduct";
 
     if(id != 0)
     {
-        temp += " WHERE workers.id = " + QString::number(id);
+        temp += " WHERE innerinfo.idInnerInfo = " + QString::number(id);
     }
 
     model_read.setQuery(temp);
+    view.setModel(&model_read);
 
-    auto check = model_read_write.query();
+    return true;
+}
 
+bool Database::ShowWareHouseInfo(int id)
+{
+    if(!db.open())
+    {
+        return false;
+    }
+    QString temp = "SELECT * FROM warehouseinfo LEFT JOIN producttype ON warehouseinfo.idwarehouseInfo = producttype.idSingleProduct";
+
+    if(id != 0)
+    {
+        temp += " WHERE warehouseinfo.idwarehouseInfo = " + QString::number(id);
+    }
+
+    model_read.setQuery(temp);
     view.setModel(&model_read);
 
     return true;

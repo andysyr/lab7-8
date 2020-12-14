@@ -17,19 +17,13 @@ public:
 
     void Connect_database();
 
-    //
     bool Show_tables();
-
     bool Show_table_data(QString table_name, int id = 0);
-
-    bool Show_data(QString table_name, int id = 0);
-
-    bool Attendance_control(int id = 0);
-
-    //
+    bool ShowSingleProductInfo(int id);
+    bool ShowInnerInfo(int id);
+    bool ShowWareHouseInfo(int id);
 
     bool Insert_data (QString table_name, std::vector<QString> data);
-
     bool Remove_raw(QString table_name, QString column, QString data);
 
     bool Close_database();
@@ -39,9 +33,10 @@ public:
     ~MainWindow();
 private slots:
     void onShow_tablesPressed();
-    void onShow_table_data();
-    void onShow_data();
-    void onAttendance_control();
+    void onShow_table_dataPressed();
+    void onShowSingleProductInfoPressed();
+    void onShowInnerInfoPressed();
+    void onShowWarehouseInfoPressed();
 
 private:
     Ui::MainWindow *ui;
